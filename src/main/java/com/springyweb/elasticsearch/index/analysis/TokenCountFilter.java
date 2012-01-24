@@ -32,10 +32,11 @@ public class TokenCountFilter extends TokenFilter {
 		final boolean increment = input.incrementToken();
 		if (increment) {
 			final char[] count = String.valueOf(this.count++).toCharArray();
-			termAtt.resizeBuffer(termAtt.length() + count.length);
-			termAtt.setLength(termAtt.length() + count.length);
-			System.arraycopy(termAtt.buffer(), 0, termAtt.buffer(), count.length, termAtt.length());
-			System.arraycopy(count, 0, termAtt.buffer(), 0, count.length);
+			final int newLength = termAtt.length() + count.length;
+			final char[] resizedBuffer = termAtt.resizeBuffer(newLength);
+			termAtt.setLength(newLength);
+			System.arraycopy(resizedBuffer, 0, resizedBuffer, count.length, termAtt.length());
+			System.arraycopy(count, 0, resizedBuffer, 0, count.length);
 		}
 		return increment;
 	}
