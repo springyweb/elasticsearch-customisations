@@ -29,14 +29,13 @@ public class TokenCountFilter extends TokenFilter {
 	 */
 	@Override
 	public final boolean incrementToken() throws IOException {
-		boolean increment = false;
-		if (input.incrementToken()) {
+		final boolean increment = input.incrementToken();
+		if (increment) {
 			final char[] count = String.valueOf(this.count++).toCharArray();
 			termAtt.resizeBuffer(termAtt.length() + count.length);
 			termAtt.setLength(termAtt.length() + count.length);
 			System.arraycopy(termAtt.buffer(), 0, termAtt.buffer(), count.length, termAtt.length());
 			System.arraycopy(count, 0, termAtt.buffer(), 0, count.length);
-			increment = true;
 		}
 		return increment;
 	}
