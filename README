@@ -1,1 +1,11 @@
---TODO - Write a README
+A collection of customisations we are using with ElasticSearch.
+
+Build instructions (tested on Apache Maven 3.0.3)
+
+mvn install
+
+And then copy target/elasticsearch-customisations-<version>.jar to $ES_HOME/lib
+
+Read about how we are managing hierarchical faceting:
+
+http://www.springyweb.com/2012/01/hierarchical-faceting-with-elastic.html
