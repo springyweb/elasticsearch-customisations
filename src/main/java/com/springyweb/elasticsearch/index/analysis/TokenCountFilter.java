@@ -31,12 +31,12 @@ public class TokenCountFilter extends TokenFilter {
 	public final boolean incrementToken() throws IOException {
 		final boolean increment = input.incrementToken();
 		if (increment) {
-			final char[] count = String.valueOf(this.count++).toCharArray();
-			final int newLength = termAtt.length() + count.length;
+			final char[] countChars = String.valueOf(this.count++).toCharArray();
+			final int newLength = termAtt.length() + countChars.length;
 			final char[] resizedBuffer = termAtt.resizeBuffer(newLength);
 			termAtt.setLength(newLength);
-			System.arraycopy(resizedBuffer, 0, resizedBuffer, count.length, termAtt.length());
-			System.arraycopy(count, 0, resizedBuffer, 0, count.length);
+			System.arraycopy(resizedBuffer, 0, resizedBuffer, countChars.length, termAtt.length());
+			System.arraycopy(countChars, 0, resizedBuffer, 0, countChars.length);
 		}
 		return increment;
 	}
